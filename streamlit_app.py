@@ -8,6 +8,7 @@ st.title("Tenant Feedback")
 st.markdown("We value your input! This form allows you to share your thoughts and experiences about your rental property.")
 st.markdown("Your feedback helps us improve our services and ensure a better living environment for all tenants.")
 st.markdown("Thank you for taking the time to help us enhance your rental experience!")
+
 # Establishing a Google Sheets connection
 conn = st.connection("gsheets", type=GSheetsConnection)
 
@@ -50,5 +51,9 @@ if submit_button:
         # Update Google Sheets with the new feedback data
         conn.update(worksheet="Tenant", data=updated_df)
 
+        # Show success message
         st.success(f"Thank you {name if name else 'Anonymous'}! Your feedback has been submitted.")
-        
+
+        # Stop the script and prevent further interaction (to simulate app close)
+        st.stop()
+
